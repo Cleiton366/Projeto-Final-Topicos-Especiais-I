@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Project X</string>
+    <string name="cover">Cover</string>
+    <string name="character_name_place_holder">Netrunner</string>
+    <string name="character_role_place_holder">Traitor</string>
+    <string name="title_place_holder">Title Place Holder</string>
+    <string name="how_to_play_role">How to play your role:</string>
+    <string name="description_place_holder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="play_btn_text">Play</string>
+    <string name="how_to_play_btn_text">How to Play</string>
+    <string name="about_btn_text">About the Game</string>
+    <string name="your_role_is">Your role is:</string>
+    <string name="ok">Ok</string>
+    <string name="kill_player">Kill this player</string>
+</resources>
