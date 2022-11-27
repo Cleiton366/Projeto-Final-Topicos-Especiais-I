@@ -183,7 +183,8 @@ class SortRolesActivity : AppCompatActivity() {
         val role2 = Role(
             "Suicidal",
             "You win the game if you are voted out or killed, make a lot of trouble so the crew members" +
-                    " think you are the traitor."
+                    " think you are the traitor."+
+                " You can always skip vote if you want."
         )
 
         roles.add(role2)
