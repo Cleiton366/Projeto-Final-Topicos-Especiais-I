@@ -1,5 +1,6 @@
 package com.quixada.ufc.projectx
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -57,9 +58,12 @@ class SortRolesActivity : AppCompatActivity() {
                 Thread.sleep(20000)
                 //TODO narrate that this specific player must sleep now
             }
+            val intent = Intent(applicationContext, Timer::class.java)
+            startActivity(intent)
         }).start()
 
         //TODO start the timer activity in the end of this function
+
     }
 
     private fun narratePlayersRoles () {

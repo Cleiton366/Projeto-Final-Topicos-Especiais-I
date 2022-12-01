@@ -1,5 +1,6 @@
 package com.quixada.ufc.projectx
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -42,5 +43,8 @@ class DetailActivity : AppCompatActivity() {
         eliminatedCharactersList.add(character)
         charactersList.removeAt(characterID)
         //TODO go back to timer activity
+        //if(character.role == )
+        val intent = Intent(applicationContext, Timer::class.java)
+        startActivity(intent)
     }
 }
