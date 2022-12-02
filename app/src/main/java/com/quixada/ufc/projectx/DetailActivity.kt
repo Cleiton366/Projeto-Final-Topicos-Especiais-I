@@ -16,6 +16,9 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newPlayerList = intent.extras?.get("playerList") as CharacterList
+        playersList = newPlayerList
+
         val characterID = intent.getIntExtra(Character_ID_EXTRA, -1)
         val character = characterFromID(characterID)
         this.character = character!!
@@ -24,12 +27,10 @@ class DetailActivity : AppCompatActivity() {
             binding.title.text = character.title
             binding.description.text = character.description
         }
-        val newPlayerList = intent.extras?.get("playerList") as CharacterList
-        playersList = newPlayerList
 
         val eliminatePLayerBtn = findViewById<LinearLayout>(R.id.kill_btn)
         eliminatePLayerBtn.setOnClickListener {
-            eliminatePlayer(characterID)
+            eliminatePlayer(character)
         }
     }
 
@@ -41,9 +42,9 @@ class DetailActivity : AppCompatActivity() {
         return null
     }
 
-    private fun eliminatePlayer(characterID: Int) {
+    private fun eliminatePlayer(character: Character) {
         eliminatedCharactersList.add(character)
-        playersList.charactersList.removeAt(characterID)
+        playersList.charactersList.remove(character)
         //TODO go back to timer activity
         //if(character.role == )
         val intent = Intent(applicationContext, Timer::class.java)

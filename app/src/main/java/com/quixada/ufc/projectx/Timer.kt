@@ -24,8 +24,7 @@ class Timer : AppCompatActivity() {
     private lateinit var timer: CountDownTimer
     private lateinit var playersList : CharacterList
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,7 +34,7 @@ class Timer : AppCompatActivity() {
 
         val textV = findViewById<TextView>(R.id.timeTV)
 
-        timer = object : CountDownTimer(240000,1000){
+        timer = object : CountDownTimer(2000,1000){
             override fun onTick(millisUntilFinished: Long) {
                 textV.setText("Seconds Remaining: " + millisUntilFinished / 1000)
             }
