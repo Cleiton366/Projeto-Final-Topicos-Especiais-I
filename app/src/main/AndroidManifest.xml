@@ -10,6 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardViewRecyclerViewTutorial">
         <activity
+            android:name=".AboutGame"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".HowToPlay"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Voting"
             android:exported="false">
             <meta-data

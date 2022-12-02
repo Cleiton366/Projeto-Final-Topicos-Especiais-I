@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HowToPlay"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:text="The player's objective during the game will depend on which character he is, if he is a member of the crew he must find out who are the traitors and the murderer then eliminate them in the vote, if he is the murderer or a traitor the objective will be to eliminate the members from the crew one by one in each round until there are none left, we still have the suicide that aims to be eliminated through voting as soon as possible.
+In each round we will have a vote where a player will be democratically chosen to be eliminated, and this is the time to use investigation or persuasion skills to achieve the objectives."
+
+            android:textColor="@color/neonGreen"
+            android:textSize="10pt" />
+
+    </LinearLayout>
+
+
+</ScrollView>

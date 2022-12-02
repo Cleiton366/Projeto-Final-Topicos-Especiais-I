@@ -45,7 +45,7 @@ class SortRolesActivity : AppCompatActivity() {
             //TODO narrate that every player must sleep now
 
             runOnUiThread {
-                Thread.sleep(1000)
+                Thread.sleep(5000)
                 playerRoleContainer.isInvisible = false
             }
 
@@ -54,7 +54,7 @@ class SortRolesActivity : AppCompatActivity() {
                 runOnUiThread { characterRole.text = character.role.roleName }
                 runOnUiThread { characterRoleDescription.text = character.role.roleDescription }
                 //TODO narrate that this specific player must wake up to see his/her role
-                Thread.sleep( 1)
+                Thread.sleep( 20000)
                 //TODO narrate that this specific player must sleep now
             }
             val intent = Intent(applicationContext, Timer::class.java)

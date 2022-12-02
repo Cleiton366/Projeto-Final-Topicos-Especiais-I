@@ -28,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
             binding.description.text = character.description
         }
 
+
         val eliminatePLayerBtn = findViewById<LinearLayout>(R.id.kill_btn)
         eliminatePLayerBtn.setOnClickListener {
             eliminatePlayer(character)

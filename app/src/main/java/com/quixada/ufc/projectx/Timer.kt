@@ -34,7 +34,16 @@ class Timer : AppCompatActivity() {
 
         val textV = findViewById<TextView>(R.id.timeTV)
 
-        timer = object : CountDownTimer(2000,1000){
+        val voteButton = findViewById<Button>(R.id.voteButton)
+        voteButton.setOnClickListener{
+            val intent = Intent(applicationContext, EliminatePlayerActivity::class.java)
+            intent.putExtra("playerList", playersList)
+            startActivity(intent)
+        }
+
+
+        timer = object : CountDownTimer(240000,1000){
+
             override fun onTick(millisUntilFinished: Long) {
                 textV.setText("Seconds Remaining: " + millisUntilFinished / 1000)
             }

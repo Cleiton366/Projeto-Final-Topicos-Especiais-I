@@ -23,11 +23,12 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
         howToPlayBtn.setOnClickListener {
-            val intent = Intent(applicationContext, Timer::class.java)
+            val intent = Intent(applicationContext, HowToPlay::class.java)
             startActivity(intent)
         }
         aboutBtn.setOnClickListener {
-
+            val intent = Intent(applicationContext, AboutGame::class.java)
+            startActivity(intent)
         }
     }
 }
