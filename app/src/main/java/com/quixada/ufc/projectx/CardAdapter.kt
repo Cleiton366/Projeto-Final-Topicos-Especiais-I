@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.quixada.ufc.projectx.databinding.CardCellBinding
 
 class CardAdapter(
-    private val characters : List<Character>,
+    private val characters : MutableList<Character>,
     private val clickListener: CharacterClickListener
     )
     : RecyclerView.Adapter<CardViewHolder>() {

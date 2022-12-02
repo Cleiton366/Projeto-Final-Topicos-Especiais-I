@@ -8,21 +8,26 @@ import com.quixada.ufc.projectx.databinding.ActivityEliminatePlayerBinding
 
 class EliminatePlayerActivity : AppCompatActivity(), CharacterClickListener {
     private lateinit var binding: ActivityEliminatePlayerBinding
+    private lateinit var playersList : CharacterList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEliminatePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newPlayerList = intent.extras?.get("playerList") as CharacterList
+        playersList = newPlayerList
+
         val mainActivity = this
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(applicationContext, 2)
-            adapter = CardAdapter(charactersList, mainActivity)
+            adapter = CardAdapter(playersList.charactersList, mainActivity)
         }
     }
     override fun onClick(character: Character) {
         val intent = Intent(applicationContext, DetailActivity::class.java)
         intent.putExtra(Character_ID_EXTRA, character.id)
+        intent.putExtra("playerList", playersList)
         startActivity(intent)
     }
 

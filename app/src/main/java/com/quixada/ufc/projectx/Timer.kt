@@ -22,6 +22,7 @@ class Timer : AppCompatActivity() {
     private lateinit var serviceIntent: Intent
     private var time = 0.0
     private lateinit var timer: CountDownTimer
+    private lateinit var playersList : CharacterList
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -29,6 +30,8 @@ class Timer : AppCompatActivity() {
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newPlayerList = intent.extras?.get("playerList") as CharacterList
+        playersList = newPlayerList
 
         val textV = findViewById<TextView>(R.id.timeTV)
 
@@ -39,6 +42,7 @@ class Timer : AppCompatActivity() {
 
             override fun onFinish() {
                 val intent = Intent(applicationContext, EliminatePlayerActivity::class.java)
+                intent.putExtra("playerList", playersList)
                 startActivity(intent)
             }
 

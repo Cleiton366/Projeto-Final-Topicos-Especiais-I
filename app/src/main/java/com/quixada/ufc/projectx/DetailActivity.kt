@@ -8,7 +8,7 @@ import com.quixada.ufc.projectx.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-
+    private lateinit var playersList : CharacterList
     lateinit var character: Character
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +24,8 @@ class DetailActivity : AppCompatActivity() {
             binding.title.text = character.title
             binding.description.text = character.description
         }
+        val newPlayerList = intent.extras?.get("playerList") as CharacterList
+        playersList = newPlayerList
 
         val eliminatePLayerBtn = findViewById<LinearLayout>(R.id.kill_btn)
         eliminatePLayerBtn.setOnClickListener {
@@ -32,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun characterFromID(characterID: Int): Character? {
-        for(character in charactersList) {
+        for(character in playersList.charactersList) {
             if(character.id == characterID)
                 return character
         }
@@ -41,10 +43,11 @@ class DetailActivity : AppCompatActivity() {
 
     private fun eliminatePlayer(characterID: Int) {
         eliminatedCharactersList.add(character)
-        charactersList.removeAt(characterID)
+        playersList.charactersList.removeAt(characterID)
         //TODO go back to timer activity
         //if(character.role == )
         val intent = Intent(applicationContext, Timer::class.java)
+        intent.putExtra("playerList", playersList)
         startActivity(intent)
     }
 }

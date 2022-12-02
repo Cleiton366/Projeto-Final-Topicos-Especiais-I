@@ -11,6 +11,7 @@ import androidx.core.view.marginTop
 import kotlinx.coroutines.*
 
 class SortRolesActivity : AppCompatActivity() {
+    private var playersList = CharacterList(charactersList)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sort_roles)
@@ -19,7 +20,6 @@ class SortRolesActivity : AppCompatActivity() {
         populateRoles()
         shuffleCharactersArray()
         sortRoles()
-
         val playerRoleContainer: LinearLayout = findViewById(R.id.player_role_container)
         val beforePlay : LinearLayout = findViewById(R.id.before_you_play_container)
         val playBtn: LinearLayout = findViewById(R.id.play_btn)
@@ -59,6 +59,7 @@ class SortRolesActivity : AppCompatActivity() {
                 //TODO narrate that this specific player must sleep now
             }
             val intent = Intent(applicationContext, Timer::class.java)
+            intent.putExtra("playerList", playersList)
             startActivity(intent)
         }).start()
 
