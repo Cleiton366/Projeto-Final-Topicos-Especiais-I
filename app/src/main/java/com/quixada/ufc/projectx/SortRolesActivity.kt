@@ -1,14 +1,15 @@
 package com.quixada.ufc.projectx
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isInvisible
-import androidx.core.view.marginTop
 import kotlinx.coroutines.*
+import java.lang.Math.random
 
 class SortRolesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +18,8 @@ class SortRolesActivity : AppCompatActivity() {
 
         populateCharacters()
         populateRoles()
-        shuffleCharactersArray()
         sortRoles()
+        shuffleCharactersArray()
         val playerRoleContainer: LinearLayout = findViewById(R.id.player_role_container)
         val beforePlay : LinearLayout = findViewById(R.id.before_you_play_container)
         val playBtn: LinearLayout = findViewById(R.id.play_btn)
@@ -42,71 +43,123 @@ class SortRolesActivity : AppCompatActivity() {
         val characterRoleDescription = findViewById<TextView>(R.id.character_role_description)
 
         Thread(Runnable {
-            //TODO narrate that every player must sleep now
 
             runOnUiThread {
-                Thread.sleep(5000)
                 playerRoleContainer.isInvisible = false
+                narratePlayersSleep("Crew member")
             }
+            runOnUiThread { Thread.sleep(5000) }
 
             for (character in charactersList) {
+                runOnUiThread { playerRoleContainer.isInvisible = false }
                 runOnUiThread { characterName.text = character.title }
                 runOnUiThread { characterRole.text = character.role.roleName }
                 runOnUiThread { characterRoleDescription.text = character.role.roleDescription }
-                //TODO narrate that this specific player must wake up to see his/her role
-                Thread.sleep( 20000)
-                //TODO narrate that this specific player must sleep now
+                runOnUiThread { narratePlayersWakeUp(character.title) }
+                Thread.sleep( 10000)
+                runOnUiThread { playerRoleContainer.isInvisible = true }
+                runOnUiThread { narratePlayersSleep(character.title) }
+                Thread.sleep( 5000)
             }
             val intent = Intent(applicationContext, Timer::class.java)
             var playersList = CharacterList(charactersList)
             intent.putExtra("playerList", playersList)
             startActivity(intent)
         }).start()
-
-        //TODO start the timer activity in the end of this function
-
     }
 
-    private fun narratePlayersRoles () {
-        //TODO narrate function
+    private fun narratePlayersSleep (character : String) {
+        when(character) {
+            "Journalist" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.journalist_sleep)
+                mediaPlayer.start()
+            }
+            "Rockerboy" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.rockerboy_sleep)
+                mediaPlayer.start()
+            }
+            "Cop" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.cop_sleep)
+                mediaPlayer.start()
+            }
+            "Techie" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.techie_sleep)
+                mediaPlayer.start()
+            }
+            "Fixer" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.fixer_sleep)
+                mediaPlayer.start()
+            }
+            "Netrunner" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.netrunner_sleep)
+                mediaPlayer.start()
+            }
+            "Corporate" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.corporate_sleep)
+                mediaPlayer.start()
+            }
+            "Solo" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.solo_sleep)
+                mediaPlayer.start()
+            }
+            "Nomad" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.nomad_sleep)
+                mediaPlayer.start()
+            }
+            "Crew member" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.crews_members_sleep)
+                mediaPlayer.start()
+            }
+        }
+    }
+    private fun narratePlayersWakeUp (character : String) {
+        when(character) {
+            "Journalist" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.journalist_wake_up)
+                mediaPlayer.start()
+            }
+            "Rockerboy" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.rockerboy_wake_up)
+                mediaPlayer.start()
+            }
+            "Cop" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.cop_wake_up)
+                mediaPlayer.start()
+            }
+            "Techie" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.techie_wake_up)
+                mediaPlayer.start()
+            }
+            "Fixer" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.fixer_wake_up)
+                mediaPlayer.start()
+            }
+            "Netrunner" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.netrunner_wake_up)
+                mediaPlayer.start()
+            }
+            "Corporate" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.corporate_wake_up)
+                mediaPlayer.start()
+            }
+            "Solo" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.solo_wake_up)
+                mediaPlayer.start()
+            }
+            "Nomad" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.nomad_wake_up)
+                mediaPlayer.start()
+            }
+            "Crew member" -> {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.crew_members_wake_up)
+                mediaPlayer.start()
+            }
+        }
     }
 
     private fun sortRoles() {
-        var playerCount = charactersList.size-1
-        for(character in charactersList) {
-            character.role = setRole(playerCount)
-            playerCount--
-        }
-    }
-
-    private fun setRole(playerCount : Int) : Role {
-
-        if (playerCount == 0) {
-            val hasTraitor = hasTraitor()
-            if(!hasTraitor) {
-                for(role in roles) {
-                    if(role.roleName == "Traitor") return role
-                }
-            }
-        }
-
-        val rolesCount = roles.size-1
-        val roleIdx = (0..rolesCount).random()
-        val randomRole : Role = roles[roleIdx]
-        if(randomRole.roleName != "Crew member") roles.removeAt(roleIdx)
-
-        return randomRole
-    }
-
-    //this function is to guarantee that every match has a traitor
-    private fun hasTraitor () : Boolean {
-        var hasTraitor = false
-
-        for(character in charactersList) {
-            if(character.role.roleName == "Traitor") hasTraitor = true
-        }
-
-        return hasTraitor
+        val randomIdx = (0..5).random()
+        charactersList[randomIdx].role = roles[0]
     }
 
     private fun shuffleCharactersArray ()  {
@@ -154,27 +207,6 @@ class SortRolesActivity : AppCompatActivity() {
             getString(R.string.description_place_holder)
         )
         charactersList.add(character6)
-
-        val character7 = Character(
-            R.drawable.rockerboy,
-            "Rockerboy",
-            getString(R.string.description_place_holder)
-        )
-        charactersList.add(character7)
-
-        val character8 = Character(
-            R.drawable.solo,
-            "Solo",
-            getString(R.string.description_place_holder)
-        )
-        charactersList.add(character8)
-
-        val character9 = Character(
-            R.drawable.techie,
-            "Techie",
-            getString(R.string.description_place_holder)
-        )
-        charactersList.add(character9)
     }
 
     private fun populateRoles () {
@@ -184,41 +216,6 @@ class SortRolesActivity : AppCompatActivity() {
                     " Traitor can only kill one crew member peer round."
         )
         roles.add(role1)
-
-        val role2 = Role(
-            "Suicidal",
-            "You win the game if you are voted out or killed, make a lot of trouble so the crew members" +
-                    " think you are the traitor."+
-                " You can always skip vote if you want."
-        )
-
-        roles.add(role2)
-
-        val role3 = Role(
-            "Hitman",
-            "You notice there's a traitor among the crew members." +
-                    " Be the last one alive to win the game." +
-                    " Hitman can only kill one crew member peer round." +
-                    " You must skip vote every time."
-        )
-
-        roles.add(role3)
-
-        val role4 = Role(
-            "Punisher",
-            "You are part of the crew and can kill one crew member you suspect is the traitor" +
-                    " without consequences. Vote out all traitors to win the game"
-        )
-
-        roles.add(role4)
-
-        val role5 = Role(
-            "Sheriff",
-            "You are part of the crew and can kill any crew member you suspect is the traitor" +
-                    " but if you kill an innocent crewman you are eliminated. Vote out all traitors to win the game"
-        )
-
-        roles.add(role5)
 
         val role6 = Role(
             "Crew member",

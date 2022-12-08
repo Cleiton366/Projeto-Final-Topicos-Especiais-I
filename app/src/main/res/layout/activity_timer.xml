@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/cardview_dark_background">
 
     <TextView
         android:id="@+id/timeTV"
@@ -14,14 +15,39 @@
         android:layout_height="wrap_content"
         android:text="00:00:00"
         android:padding="10dp"
-        android:textColor="@color/black"
         android:textSize="60sp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/neonGreen"/>
 
     <Button
         android:id="@+id/voteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vote" />
+        android:text="Vote"
+        android:textColor="@color/neonGreen"/>
+
+    <LinearLayout
+        android:id="@+id/players_eliminated_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminated players:"
+            android:textColor="@color/neonGreen"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/players_eliminated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/neonGreen"
+            android:textSize="12pt"
+            android:textAlignment="center"/>
+    </LinearLayout>
 
 </LinearLayout>

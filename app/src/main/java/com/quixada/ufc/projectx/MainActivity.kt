@@ -10,6 +10,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val intent = Intent(applicationContext, MainMenu::class.java)
         startActivity(intent)
-
     }
 }

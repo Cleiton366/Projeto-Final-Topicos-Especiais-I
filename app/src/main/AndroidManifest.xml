@@ -10,6 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardViewRecyclerViewTutorial">
         <activity
+            android:name=".GameOver"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TraitorsEliminatePlayerActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AboutGame"
             android:exported="false">
             <meta-data
@@ -55,7 +69,7 @@
             android:name=".SortRolesActivity"
             android:exported="false" />
         <activity
-            android:name=".EliminatePlayerActivity"
+            android:name=".CrewMembersEliminatePlayerActivity"
             android:exported="false" />
         <activity
             android:name=".MainMenu"

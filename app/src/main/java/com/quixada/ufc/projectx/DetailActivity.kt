@@ -28,7 +28,6 @@ class DetailActivity : AppCompatActivity() {
             binding.description.text = character.description
         }
 
-
         val eliminatePLayerBtn = findViewById<LinearLayout>(R.id.kill_btn)
         eliminatePLayerBtn.setOnClickListener {
             eliminatePlayer(character)
@@ -46,10 +45,40 @@ class DetailActivity : AppCompatActivity() {
     private fun eliminatePlayer(character: Character) {
         eliminatedCharactersList.add(character)
         playersList.charactersList.remove(character)
-        //TODO go back to timer activity
-        //if(character.role == )
-        val intent = Intent(applicationContext, Timer::class.java)
-        intent.putExtra("playerList", playersList)
-        startActivity(intent)
+        var crewMembersQtd = 0
+
+        var hasTraitor = false
+        var hasCrew = false
+
+        for(character in playersList.charactersList) {
+            if(character.role.roleName == "Traitor") hasTraitor = true
+            if(character.role.roleName == "Crew member") {
+                hasCrew = true
+                crewMembersQtd++
+            }
+        }
+
+        if (!hasTraitor) {
+            //crew members wins
+            val intent = Intent(applicationContext, GameOver::class.java)
+            intent.putExtra("winner", "crew members")
+            intent.putExtra("playerList", playersList)
+            startActivity(intent)
+        } else if(crewMembersQtd == 1) {
+            //traitor wins
+            val intent = Intent(applicationContext, GameOver::class.java)
+            intent.putExtra("playerList", playersList)
+            intent.putExtra("winner", "traitor")
+            startActivity(intent)
+        } else if(isTraitorVoting) {
+            val intent = Intent(applicationContext, TraitorsEliminatePlayerActivity::class.java)
+            intent.putExtra("playerList", playersList)
+            startActivity(intent)
+        } else {
+            val intent = Intent(applicationContext, Timer::class.java)
+            intent.putExtra("playerList", playersList)
+            startActivity(intent)
+        }
     }
+
 }
